@@ -1,0 +1,347 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background: linear-gradient(135deg, #3e7fff, #ffc85c, #ff3e3e, #1cb5e0, #ff3e3e, #ffc85c, #3e7fff);
+    background-size: 800% 800%;
+    animation: gradientAnimation 30s ease infinite;
+    margin: 0;
+    padding: 0;
+    transition: background-image 0.3s ease; /* Transition for background image change */
+}
+
+#game {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+}
+
+#elements, #workspace {
+    width: 45%;
+}
+
+h2 {
+    text-align: center;
+    font-weight: 700;
+    font-size: 24px;
+    border: 2px solid #000;
+    padding: 5px 10px;
+    border-radius: 5px;
+    background-color: #fff; /* Background color for the title box */
+    margin-bottom: 10px; /* Add some space below the title */
+}
+
+#element-list {
+    list-style-type: none;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li img {
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+}
+
+li:hover {
+    transform: scale(1.1); /* Element highlight on hover */
+}
+
+#workspace-area {
+    border: 2px solid #000;
+    height: 500px;
+    position: relative;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    font-size: 16px;
+    font-weight: 400;
+    padding: 10px;
+    overflow: hidden; /* Ensure the animation stays within the workspace area */
+    animation: workspaceBackgroundAnimation 20s linear infinite alternate; /* Background animation */
+}
+
+#trash-bin {
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    cursor: pointer;
+    font-size: 24px;
+    text-align: center;
+    line-height: 50px;
+    background-color: #f44336;
+    color: white;
+    border-radius: 5px;
+    border: 2px solid #000;
+    transition: transform 0.3s ease; /* Animation for trash bin icon on hover */
+}
+
+#trash-bin:hover {
+    transform: scale(1.2); /* Trash bin icon animation on hover */
+}
+
+.element {
+    position: absolute;
+    padding: 5px;
+    border: 2px solid #000;
+    background-color: white;
+    cursor: pointer;
+    user-select: none;
+    width: 50px;
+    height: 50px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: 400;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+/* Keyframe animation for element combination effect */
+@keyframes combine-effect {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.5);
+        opacity: 0.5;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.element.combined {
+    animation: combine-effect 0.5s ease-in-out;
+}
+
+#suggest-btn, #clear-btn {
+    margin-top: 10px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease; /* Animation for button on hover */
+}
+
+#clear-btn {
+    background-color: #f44336;
+}
+
+#suggest-btn:hover, #clear-btn:hover {
+    background-color: #388e3c; /* Darker shade of green for button animation on hover */
+}
+
+#suggestions {
+    margin-top: 10px;
+    padding: 10px;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    max-height: 150px;
+    overflow-y: auto;
+}
+
+.new-element-notification {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    padding: 20px;
+    border: 2px solid #000;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+}
+
+.new-element-notification img {
+    width: 50px;
+    height: 50px;
+    margin-right: 10px;
+}
+
+.new-element-notification p {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+#total-discovered-box {
+    background-color: #f0f0f0;
+    border: 2px solid #ccc;
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    display: inline-block;
+}
+
+#total-discovered {
+    font-weight: bold;
+    margin-left: 5px;
+}
+
+#total-combinations-box {
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    display: inline-block;
+}
+
+#total-combinations-box span {
+    margin: 0 5px;
+}
+
+#total-discovered-combinations {
+    font-weight: bold;
+}
+
+#total-possible-combinations {
+    color: #888;
+}
+
+/* Add background animation */
+@keyframes gradientAnimation {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+/* Workspace background animation */
+@keyframes workspaceBackgroundAnimation {
+    0% {
+        background-position: 0% 0%;
+    }
+    100% {
+        background-position: 100% 100%;
+    }
+}
+
+/* Tooltip */
+.element-tooltip {
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+   
+font-size: 14px;
+}
+
+.combination-effect {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    background: radial-gradient(circle, rgba(255,255,255,0.7) 0%, rgba(0,0,0,0) 70%);
+    border-radius: 50%;
+    pointer-events: none;
+    animation: combination-effect-animation 1s ease-out;
+}
+
+@keyframes combination-effect-animation {
+    0% {
+        transform: scale(0);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(1.5);
+        opacity: 0;
+    }
+}
+
+/* Trash bin hover animation */
+.trash-bin-hover {
+    background-image: url("images/trash_hover.png");
+}
+
+/* New animation for background image */
+@keyframes gradientAnimation {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+/* Workspace background animation */
+@keyframes workspaceBackgroundAnimation {
+    0% {
+        background-position: 0% 0%;
+    }
+    100% {
+        background-position: 100% 100%;
+    }
+}
+
+/* Tooltip */
+.element-tooltip {
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+/* Combine effect animation */
+.combine-effect-animation {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.5);
+        opacity: 0.5;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* New element notification animation */
+.new-element-notification {
+    animation: new-element-notification-animation 1s ease;
+}
+
+@keyframes new-element-notification-animation {
+    0% {
+        transform: scale(0);
+        opacity: 0;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
