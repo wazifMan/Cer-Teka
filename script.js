@@ -83,32 +83,32 @@ function hideElementNameTooltip() {
 }
 
 function handleTouchStart(e, element) {
-       const touch = e.touches[0];
-       const touchMoveHandler = (e) => {
-           const moveTouch = e.touches[0];
-           const x = moveTouch.clientX - 50;  // Adjust for touch offset
-           const y = moveTouch.clientY - 50;  // Adjust for touch offset
-           const elementNode = document.getElementById('dragged-element');
-           if (!elementNode) {
-               createElementNode(element, x, y, true);
-           } else {
-               elementNode.style.left = `${x}px`;
-               elementNode.style.top = `${y}px`;
-           }
-       };
+    const touch = e.touches[0];
+    const touchMoveHandler = (e) => {
+        const moveTouch = e.touches[0];
+        const x = moveTouch.clientX - 50;  // Adjust for touch offset
+        const y = moveTouch.clientY - 50;  // Adjust for touch offset
+        const elementNode = document.getElementById('dragged-element');
+        if (!elementNode) {
+            createElementNode(element, x, y, true);
+        } else {
+            elementNode.style.left = `${x}px`;
+            elementNode.style.top = `${y}px`;
+        }
+    };
 
-       const touchEndHandler = () => {
-           document.removeEventListener('touchmove', touchMoveHandler);
-           document.removeEventListener('touchend', touchEndHandler);
-           const elementNode = document.getElementById('dragged-element');
-           if (elementNode) {
-               elementNode.id = `element-${elementCounter++}`;
-               elementNode.classList.remove('dragged');
-           }
-       };
+    const touchEndHandler = () => {
+        document.removeEventListener('touchmove', touchMoveHandler);
+        document.removeEventListener('touchend', touchEndHandler);
+        const elementNode = document.getElementById('dragged-element');
+        if (elementNode) {
+            elementNode.id = `element-${elementCounter++}`;
+            elementNode.classList.remove('dragged');
+        }
+    };
 
-       document.addEventListener('touchmove', touchMoveHandler);
-       document.addEventListener('touchend', touchEndHandler);
+    document.addEventListener('touchmove', touchMoveHandler);
+    document.addEventListener('touchend', touchEndHandler);
 }
 
 function createElementNode(element, x, y) {
@@ -204,7 +204,7 @@ function checkElementCollision() {
                             const rect3 = el3.getBoundingClientRect();
                             if (!(rect1.right < rect3.left ||
                                 rect1.left > rect3.right ||
-                                rect1.bottom <                                rect3.top ||
+                                rect1.bottom < rect3.top ||
                                 rect2.right < rect3.left ||
                                 rect2.left > rect3.right ||
                                 rect2.bottom < rect3.top ||
