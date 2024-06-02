@@ -368,6 +368,15 @@ li:hover {
     #workspace-area {
         height: 300px;
     }
+
+    #trash-bin {
+        bottom: 20px;
+        right: 20px;
+    }
+
+    #suggestions {
+        max-height: 100px;
+    }
 }
 
 /* Windows Device Styles */
