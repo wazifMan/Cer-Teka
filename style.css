@@ -10,17 +10,6 @@ body {
     transition: background-image 0.3s ease; /* Transition for background image change */
 }
 
-.controls {
-    margin: 10px 0;
-}
-
-button {
-    margin: 5px;
-    padding: 10px;
-    font-size: 16px;
-    cursor: pointer;
-}
-
 .audio-controls {
     position: fixed;
     bottom: 20px;
@@ -270,8 +259,7 @@ li:hover {
     color: white;
     padding: 5px 10px;
     border-radius: 5px;
-   
-font-size: 14px;
+    font-size: 14px;
 }
 
 .combination-effect {
@@ -365,6 +353,9 @@ font-size: 14px;
     }
 }
 
+/* Media Queries */
+
+/* Smartphone Styles */
 @media (max-width: 768px) {
     #game {
         flex-direction: column;
@@ -390,3 +381,12 @@ font-size: 14px;
         left: 50px;
     }
 }
+
+/* Touchscreen Mode */
+@media (hover: none) {
+    li:hover {
+        transform: none; /* Disable hover effect on touchscreen devices */
+    }
+}
+
+
