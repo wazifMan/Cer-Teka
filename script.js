@@ -35,29 +35,25 @@ const suggestBtn = document.getElementById('suggest-btn');
 const clearBtn = document.getElementById('clear-btn');
 const totalDiscovered = document.getElementById('total-discovered');
 
- function renderElements() {
-        elementList.innerHTML = '';
-        discoveredElements.forEach(element => {
-            const li = document.createElement('li');
-            const img = document.createElement('img');
-            img.src = `images/${element}.png`;
-            img.alt = element;
-            img.draggable = false;
-            img.onerror = () => {
-                img.src = 'images/placeholder.png';
-                console.error(`Error loading image: images/${element}.png`);
-            };
-            li.appendChild(img);
-            li.draggable = true;
-            li.addEventListener('dragstart', (e) => {
-                e.dataTransfer.setData('text/plain', element);
-            });
-            li.addEventListener('touchstart', (e) => {
-                e.preventDefault();
-                handleTouchStart(e, element);
-            });
-            elementList.appendChild(li);
+function renderElements() {
+    elementList.innerHTML = '';
+    discoveredElements.forEach(element => {
+        const li = document.createElement('li');
+        const img = document.createElement('img');
+        img.src = `images/${element}.png`;
+        img.alt = element;
+        img.draggable = false;
+        img.onerror = () => {
+            img.src = 'images/placeholder.png';
+            console.error(`Error loading image: images/${element}.png`);
+        };
+        li.appendChild(img);
+        li.draggable = true;
+        li.addEventListener('dragstart', (e) => {
+            e.dataTransfer.setData('text/plain', element);
         });
+        elementList.appendChild(li);
+    });
 
     const elementImages = document.querySelectorAll('#element-list img');
     elementImages.forEach(img => {
@@ -80,35 +76,6 @@ function showElementNameTooltip(e) {
 function hideElementNameTooltip() {
     const tooltips = document.querySelectorAll('.element-tooltip');
     tooltips.forEach(tooltip => tooltip.remove());
-}
-
-function handleTouchStart(e, element) {
-    const touch = e.touches[0];
-    const touchMoveHandler = (e) => {
-        const moveTouch = e.touches[0];
-        const x = moveTouch.clientX - 50;  // Adjust for touch offset
-        const y = moveTouch.clientY - 50;  // Adjust for touch offset
-        const elementNode = document.getElementById('dragged-element');
-        if (!elementNode) {
-            createElementNode(element, x, y, true);
-        } else {
-            elementNode.style.left = `${x}px`;
-            elementNode.style.top = `${y}px`;
-        }
-    };
-
-    const touchEndHandler = () => {
-        document.removeEventListener('touchmove', touchMoveHandler);
-        document.removeEventListener('touchend', touchEndHandler);
-        const elementNode = document.getElementById('dragged-element');
-        if (elementNode) {
-            elementNode.id = `element-${elementCounter++}`;
-            elementNode.classList.remove('dragged');
-        }
-    };
-
-    document.addEventListener('touchmove', touchMoveHandler);
-    document.addEventListener('touchend', touchEndHandler);
 }
 
 function createElementNode(element, x, y) {
@@ -204,7 +171,7 @@ function checkElementCollision() {
                             const rect3 = el3.getBoundingClientRect();
                             if (!(rect1.right < rect3.left ||
                                 rect1.left > rect3.right ||
-                                rect1.bottom < rect3.top ||
+                                rect1.bottom <                                rect3.top ||
                                 rect2.right < rect3.left ||
                                 rect2.left > rect3.right ||
                                 rect2.bottom < rect3.top ||
@@ -432,3 +399,16 @@ document.addEventListener("DOMContentLoaded", function() {
     stopButton.addEventListener('click', () => backgroundSound.pause());
     document.body.appendChild(stopButton);
 });
+
+// Device Type Check
+function isSmartphone() {
+    return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+}
+
+// Add coding for smartphone
+if (isSmartphone()) {
+    // Your smartphone-specific JavaScript code here
+} else {
+    // Add coding for windows
+    // Your Windows-specific JavaScript code here
+}
