@@ -364,3 +364,29 @@ font-size: 14px;
         opacity: 1;
     }
 }
+
+@media (max-width: 768px) {
+    #game {
+        flex-direction: column;
+    }
+
+    #elements, #workspace {
+        width: 100%;
+    }
+
+    #workspace-area {
+        height: 300px;
+    }
+}
+
+/* Windows Device Styles */
+@media (min-width: 1024px) {
+    body {
+        background-size: 100% 100%;
+    }
+
+    .audio-controls {
+        bottom: 50px;
+        left: 50px;
+    }
+}
