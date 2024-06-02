@@ -412,3 +412,49 @@ if (isSmartphone()) {
     // Add coding for windows
     // Your Windows-specific JavaScript code here
 }
+
+function isTouchScreenDevice() {
+    return 'ontouchstart' in window || navigator.maxTouchPoints;
+}
+
+// Function to handle touch events
+function handleTouchEvent(event) {
+    const touch = event.touches[0];
+    const element = event.target;
+    const offsetX = touch.clientX - element.getBoundingClientRect().left;
+    const offsetY = touch.clientY - element.getBoundingClientRect().top;
+    const x = touch.clientX - workspaceArea.offsetLeft - offsetX;
+    const y = touch.clientY - workspaceArea.offsetTop - offsetY;
+
+    createElementNode(element.alt, x, y);
+    checkElementCollision();
+}
+
+// Function to add touch event listeners to elements
+function addTouchListeners() {
+    const elementImages = document.querySelectorAll('#element-list img');
+    elementImages.forEach(img => {
+        img.addEventListener('touchstart', handleTouchEvent);
+    });
+}
+
+// Function to remove touch event listeners from elements
+function removeTouchListeners() {
+    const elementImages = document.querySelectorAll('#element-list img');
+    elementImages.forEach(img => {
+        img.removeEventListener('touchstart', handleTouchEvent);
+    });
+}
+
+// Initialize touch screen mode
+function initializeTouchMode() {
+    if (isTouchScreenDevice()) {
+        // Add touch event listeners
+        addTouchListeners();
+        // Add touch event listener to workspace area
+        workspaceArea.addEventListener('touchstart', handleTouchEvent);
+    }
+}
+
+// Call the function to initialize touch screen mode
+initializeTouchMode();
