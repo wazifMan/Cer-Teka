@@ -10,6 +10,17 @@ body {
     transition: background-image 0.3s ease; /* Transition for background image change */
 }
 
+.controls {
+    margin: 10px 0;
+}
+
+button {
+    margin: 5px;
+    padding: 10px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
 .audio-controls {
     position: fixed;
     bottom: 20px;
