@@ -10,6 +10,14 @@ body {
     transition: background-image 0.3s ease; /* Transition for background image change */
 }
 
+.audio-controls {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    display: flex;
+    gap: 10px;
+}
+
 #game {
     display: flex;
     justify-content: space-between;
@@ -345,3 +353,4 @@ font-size: 14px;
         opacity: 1;
     }
 }
+
